@@ -122,6 +122,29 @@ void addStudent(void) {
            names[idx], ids[idx], studentCount, MAX_STUDENTS);
 }
 void printStudentLine(int i) {
-    
+     printf("%-6d %-25s %-25s %-8d %-11d\n", ids[i], names[i], majors[i], gpas[i], credits[i]);
 }
+void displayAllStudents(void) {
+    if (studentCount == 0) {
+        printf("No students in the registry yet.\n");
+    }
+    printf("\n============================================================================");
+    printf("\n           -------- ALL STUDENTS (%d TOTAL) --------\n", studentCount);
+       printf("============================================================================\n");
+     printf("ID     NAME                      MAJOR                     GPA      CREDITS\n");
+    printf("----------------------------------------------------------------------------\n");
+
+    for (int i = 0; i < studentCount; i++) {
+        printStudentLine(i);
+         printf("============================================================================");
+    }
+}
+
+int findIndexById(int id) {
+    for (int i = 0; i < studentCount; i++) {
+        if (ids[i] == id) {
+            return i;
+        }
+    }
+
 
