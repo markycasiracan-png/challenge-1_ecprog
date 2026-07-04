@@ -109,4 +109,19 @@ void addStudent(void) {
     majors[idx][strcspn(majors[idx], "\n")] = '\0';
 
     printf("Enter GPA (0.0 - 4.0): ");
+     scanf("%f", &gpas[idx]);
+    clearInputBuffer();
+
+    printf("Enter Credits Completed: ");
+    scanf("%d", &credits[idx]);
+    clearInputBuffer();
+
+    studentCount++;
+
+    printf("\nStudent \"%s\" (ID: %d) added successfully! (%d/%d students)\n",
+           names[idx], ids[idx], studentCount, MAX_STUDENTS);
+}
+void printStudentLine(int i) {
+    
+}
 
