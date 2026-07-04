@@ -109,5 +109,4 @@ void addStudent(void) {
     majors[idx][strcspn(majors[idx], "\n")] = '\0';
 
     printf("Enter GPA (0.0 - 4.0): ");
-    scanf("%f", &gpas[idx]);
-    clearInputBuffer();
+
