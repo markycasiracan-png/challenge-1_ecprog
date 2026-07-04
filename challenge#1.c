@@ -19,7 +19,7 @@ int choice;
 do {
     printf("Add new student");
     printf("Student data storage ");
-    printf("\n1. Add Student\n2. Exit\nChoice: ");
+    printf("\ ");
     scanf("%d", &choice);
 }
 
