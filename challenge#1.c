@@ -214,40 +214,4 @@ void searchByGpaThreshold(void) {
         printf("\nNo students meet this GPA threshold.\n");
          printf("\n============================================================================");
     } else {
-         printf("------------------------------------");
-         printf("\n %d student(s) found.", found);
-         printf("\n------------------------------------\n");
-    }
-
-}
-
-void searchByMajor(void) {
-    if (studentCount == 0) {
-        printf("No students in the registry yet.\n");
-        return;
-    }
-
-    char searchMajor[MAJOR_LEN];
-    printf("\nEnter major to search for: ");
-    fgets(searchMajor, MAJOR_LEN, stdin);
-    searchMajor[strcspn(searchMajor, "\n")] = '\0';
-
-    int count = 0;
-     printf("\n============================================================================");
-    printf("\n                    --- Students in \"%s\" ---", searchMajor);
-    printf("\n============================================================================\n");
-    printf("%-6s %-25s %-25s %-8s %-8s\n",
-           "ID", "Name", "Major", "GPA", "Credits");
-     printf("----------------------------------------------------------------------------\n");
-    
-    for (int i = 0; i < studentCount; i++) {
-        if (strcmp(majors[i], searchMajor) == 0) {
-            printStudentLine(i);
-            count++;
-               printf("============================================================================\n");
-        }
-    }
-    printf("-------------------------------------------------");
-    printf("\nTotal students in \"%s\": %d\n", searchMajor, count);
-    printf("-------------------------------------------------");
-}
+        
