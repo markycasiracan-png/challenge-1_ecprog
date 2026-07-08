@@ -5,14 +5,15 @@
 #define NAME_LEN 50
 #define MAJOR_LEN 30
 
-struct STUDENT {
+typedef struct {
     int   studentID;
     char  studentName[NAME_LEN];
     char  major[MAJOR_LEN];
     float gpa;
     int   credits;
-};
-struct STUDENT student[MAX_STUDENTS];
+} STUDENT;
+
+STUDENT student[MAX_STUDENTS];
 int studentCount = 0; 
 
 void printMenu(void);
@@ -34,8 +35,8 @@ printf("==============================================");
     printf("| 1. Add new student                         |\n");                     
     printf("| 2. Display all students                    |\n");                
     printf("| 3. Search student by ID                    |\n");                
-    printf("| 4. Find students with GPA >= threshold     |\n");
-    printf("| 5. Find students by major (with count)     |\n");  
+    printf("| 4. Find students with GPA                  |\n");
+    printf("| 5. Find students by major                  |\n");  
     printf("| 6. Exit                                    |\n");                                
     printf("----------------------------------------------\n");
 }
@@ -46,7 +47,7 @@ int main(void) {
         printf("\nEnter your choice in main menu: ");
 
         if (scanf("%d", &choice) != 1) {
-            printf("Invalid input. Please enter a number.\n");
+            printf("\nInvalid input. Please enter a number.\n\n");
             clearInputBuffer();
             continue;
         }
@@ -69,10 +70,10 @@ int main(void) {
                 searchByMajor();
                 break;
             case 6:
-                printf("Well done!1.......\n");
+                printf("\nWell done!.......\n");
                 break;
             default:
-                printf("Invalid choice. Please select 1-6 only.\n");
+                printf("\nInvalid choice. Please select 1-6 only!!\n");
         }
         printf("\n");
 
@@ -250,4 +251,3 @@ void searchByGpaThreshold(void) {
         printf("\nTotal students in \"%s\": %d\n", searchMajor, count);
         printf("----------------------------------------");
      }
-     
