@@ -5,12 +5,14 @@
 #define NAME_LEN 50
 #define MAJOR_LEN 30
 
-int   ids[MAX_STUDENTS];
-char  names[MAX_STUDENTS][NAME_LEN ];
-char  majors[MAX_STUDENTS][MAJOR_LEN];
-float gpas[MAX_STUDENTS];
-int   credits[MAX_STUDENTS];
-
+struct STUDENT {
+    int   studentID;
+    char  studentName[NAME_LEN];
+    char  major[MAJOR_LEN];
+    float gpa;
+    int   credits;
+};
+struct STUDENT student[MAX_STUDENTS];
 int studentCount = 0; 
 
 void printMenu(void);
@@ -95,38 +97,38 @@ void addStudent(void) {
     printf("\n          --- ADD NEW STUDENT ---\n");
     printf("===========================================\n");
     printf(" Enter Student ID: ");
-    scanf("%d", &ids[idx]);
+    scanf("%d", &student[idx].studentID);
     clearInputBuffer();
 
     for (int i = 0; i < studentCount; i++) {
-        if (ids[i] == ids[idx]) {
-            printf("A student with ID %d already exists. Student not added.\n", ids[idx]);
+        if (student[i].studentID == student[idx].studentID) {
+            printf("A student with ID %d already exists. Student not added.\n", student[idx].studentID);
             return;
         }
     }
     
     printf(" Enter Full Name: ");
-    fgets(names[idx], NAME_LEN, stdin);
-    names[idx][strcspn(names[idx], "\n")] = '\0'; 
+    fgets(student[idx].studentName, NAME_LEN, stdin);
+    student[idx].studentName[strcspn(student[idx].studentName, "\n")] = '\0'; 
 
     printf(" Enter Major: ");
-    fgets(majors[idx], MAJOR_LEN, stdin);
-    majors[idx][strcspn(majors[idx], "\n")] = '\0';
+    fgets(student[idx].major, MAJOR_LEN, stdin);
+    student[idx].major[strcspn(student[idx].major, "\n")] = '\0';
 
     printf(" Enter GPA (0.0 - 4.0): ");
-    scanf("%f", &gpas[idx]);
+    scanf("%f", &student[idx].gpa);
     clearInputBuffer();
 
     printf(" Enter Credits Completed: ");
-    scanf("%d", &credits[idx]);
+    scanf("%d", &student[idx].credits);
     clearInputBuffer();
     printf("===========================================\n");
     studentCount++;
 
-    printf("\nStudent \"%s\" (ID: %d) added successfully! (%d/%d students)\n", names[idx], ids[idx], studentCount, MAX_STUDENTS);
+    printf("\nStudent \"%s\" (ID: %d) added successfully! (%d/%d students)\n", student[idx].studentName, student[idx].studentID, studentCount, MAX_STUDENTS);
 }
 void printStudentLine(int i) {
-    printf("%-6d %-25s %-25s %-8.2f %-11d\n", ids[i], names[i], majors[i], gpas[i], credits[i]);
+    printf("%-6d %-25s %-25s %-8.2f %-11d\n", student[i].studentID, student[i].studentName, student[i].major, student[i].gpa, student[i].credits);
 }
 
 void displayAllStudents(void) {
@@ -148,7 +150,7 @@ void displayAllStudents(void) {
 
 int findIndexById(int id) {
     for (int i = 0; i < studentCount; i++) {
-        if (ids[i] == id) {
+        if (student[i].studentID == id) {
             return i;
         }
     }
@@ -174,11 +176,11 @@ void searchById(void) {
         printf("=================================");
           printf("\n    ---   Student Found ---\n");
                printf("=================================\n");
-           printf("ID:      %d\n", ids[idx]);
-        printf("Name:    %s\n", names[idx]);
-        printf("Major:   %s\n", majors[idx]);
-        printf("GPA:     %.2f\n", gpas[idx]);
-        printf("Credits: %d\n", credits[idx]);
+           printf("ID:      %d\n", student[idx].studentID);
+        printf("Name:    %s\n", student[idx].studentName);
+        printf("Major:   %s\n", student[idx].major);
+        printf("GPA:     %.2f\n", student[idx].gpa);
+        printf("Credits: %d\n", student[idx].credits);
              printf("=================================");
     }
 }
@@ -203,7 +205,7 @@ void searchByGpaThreshold(void) {
            "ID", "Name", "Major", "GPA", "Credits");
     printf("----------------------------------------------------------------------------\n");
     for (int i = 0; i < studentCount; i++) {
-        if (gpas[i] >= threshold) {
+        if (student[i].gpa >= threshold) {
             printStudentLine(i);
             found++;
              printf("============================================================================\n");
@@ -238,7 +240,7 @@ void searchByGpaThreshold(void) {
       printf("----------------------------------------------------------------------------\n");
 
       for(int i=0; i< studentCount; i++){
-          if(strcmp(majors[i], searchMajor) == 0){
+          if(strcmp(student[i].major, searchMajor) == 0){
                printStudentLine(i);
                count++;
                  printf("============================================================================\n");
@@ -248,4 +250,4 @@ void searchByGpaThreshold(void) {
         printf("\nTotal students in \"%s\": %d\n", searchMajor, count);
         printf("----------------------------------------");
      }
-        
+     
